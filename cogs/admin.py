@@ -239,7 +239,14 @@ class AdminCog(commands.Cog):
                 session, player, names
             )
 
-            await session.commit()
+            try:
+                await session.commit()
+            except Exception as e:
+                print(f"ERRO NO COMMIT ADD_PERSONA: {e}")
+                import traceback
+                traceback.print_exc()
+                await ctx.send("Erro interno ao salvar.")
+                return
 
             embed = discord.Embed(
                 title="📜 Resultado do Cadastro",

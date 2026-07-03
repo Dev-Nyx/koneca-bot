@@ -12,7 +12,7 @@ class Player(Base):
     id = Column(Integer, primary_key=True)
     discord_id = Column(String, unique=True, nullable=False)
     name = Column(String, nullable=False)
-    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     # lista de personagens da jogadora
     characters = relationship(
@@ -37,7 +37,7 @@ class Character(Base):
     id = Column(Integer, primary_key=True)  
     name = Column(String, nullable=False, index=True)
     done = Column(Boolean, default=False)
-    done_at = Column(DateTime, nullable=True)
+    done_at = Column(DateTime(timezone=True), nullable=True)
 
     player_id = Column(Integer, ForeignKey("players.id"), nullable=False)
     partner_id = Column(Integer, ForeignKey("characters.id"), nullable=True)
@@ -57,5 +57,3 @@ class Character(Base):
     def __repr__(self):
         status = "✅" if self.done else "⏳"
         return f"<Character {status} {self.name}>"
-    
-    

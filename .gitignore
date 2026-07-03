@@ -19,3 +19,7 @@ backup-bot-koneca.zip
 .vscode-server/
 backup-bot-koneca.zip
 discloud.config
+.copilot/
+koneca_backup.sql
+new
+old
